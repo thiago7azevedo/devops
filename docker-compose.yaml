@@ -9,4 +9,4 @@ services:
       - "80:80"
     restart: always
     volumes:
-      - ./iconf.d:/etc/nginx/conf.d #mapeamento arquivo de configuração
+      - ./conf.d:/etc/nginx/conf.d #mapeamento arquivo de configuração
