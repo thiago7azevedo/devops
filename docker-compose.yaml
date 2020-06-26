@@ -4,7 +4,6 @@ services:
  nginx:
     container_name: nginx
     image: nginx:alpine
-    user: 0:0 #user root
     ports:
       - "80:80"
     restart: always
