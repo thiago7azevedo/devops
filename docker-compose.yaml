@@ -2,10 +2,8 @@ version: '3'
 
 services:
  nginx:
-    container_name: nginx
-    image: nginx:alpine
+    container_name: nginx-json
+    image: thiago7sc/nginx:alpine
     ports:
       - "80:80"
     restart: always
-    volumes:
-      - ./conf.d:/etc/nginx/conf.d #mapeamento arquivo de configuração
