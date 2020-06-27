@@ -6,7 +6,7 @@ Bem vindos a instância beta do NGINX com docker compose!
 
 -> Objetivo:
 
-	- Disponibilizar de forma estática umarquivo Json através do servidor NGINX ;
+	- Disponibilizar de forma estática um arquivo Json através do servidor NGINX;
 	- Expor através da porta 80;
 	- Rodar instância em um cluster Minishift.
 
