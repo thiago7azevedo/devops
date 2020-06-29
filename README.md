@@ -80,11 +80,29 @@ ENTRYPOINT ["/usr/sbin/nginx"]
 CMD ["-g", "daemon off;"]
 
   ```
-### Como ficou o Dockerfile:
+### Build:
+`docker build -t thiago7sc/nginx:alpine .`
+#### OBS: Executar o comando onde está seu Dockerfile e não esqueçer do ponto ao final do comando. O nome da imagem criada, precisa ser o mesmo que estára no docker-compose.
 
+### Build com docker-compose:
+Para carregar a imagem que temos em nosso localhost que acabamos de criar, é necessário efetuar um Build também no docker-compose.
+`docker-compose build`
 
+### Subir containercom imagem personalizada:
+`docker-compose up -d.`
+
+### Verificar logs:
+`docker-compose logs -f`
+
+### Chamada endpoint:
+Verificar em seu navegador com localhost/api.json a saida a seguir:
+
+`{"service": {"oracle": "ok", "redis": "ok", "mongo": "down", "pgsql": "down", "mysql": "ok"}}`
 
 ## Imagens da construção:
+![conf d](https://user-images.githubusercontent.com/53309633/86056723-4102f500-ba34-11ea-94b6-3ca676c927f1.png)
+![build](https://user-images.githubusercontent.com/53309633/86056736-45c7a900-ba34-11ea-900c-d0c7efdf80b2.png)
+![up](https://user-images.githubusercontent.com/53309633/86056732-44967c00-ba34-11ea-8d32-33731e2b8451.png)
 
 
 ## Instância no GCP rodando imagem personalizada nos procedimentos citados:
