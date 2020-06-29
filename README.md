@@ -12,7 +12,7 @@
 - Procedimentos para iniciar instância Nginx:
 
 	- Clone do projeto em seu repositório local:
-		git clone https://github.com/thiago7azevedo/devops.git
+		`git clone https://github.com/thiago7azevedo/devops.git`
 	- Dentro da pasta devops, iniciar container:
 		`docker-compose up -d`
 	- Verificar se existem erros nos logs:
@@ -25,18 +25,13 @@
 	- Veremos um Arquivo JSON:
 		`{"service": {"oracle": "ok", "redis": "ok", "mongo": "down", "pgsql": "down", "mysql": "ok"}}`
 
-
-#######################################################
-
-Instância no GCP rodando imagem personalizada nos procedimentos citados:
+## Instância no GCP rodando imagem personalizada nos procedimentos citados:
 
 [API GCP](http://35.192.197.96/api.json)
 
-#######################################################
+## Testado e desenvolvido por:
 
-Testado e desenvolvido por:
-
-### Thiago Azevedo
+#### Thiago Azevedo
 
 thiago7azevedo@gmail.com - [Docker HUB](https://hub.docker.com/repository/docker/thiago7sc)
 
