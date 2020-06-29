@@ -25,6 +25,68 @@
 	- Veremos um Arquivo JSON:
 		`{"service": {"oracle": "ok", "redis": "ok", "mongo": "down", "pgsql": "down", "mysql": "ok"}}`
 
+- Procedimentos para Build da imagem personalizada:
+
+	- Dockerfile:
+		`vi Dockerfile`
+	- Docker Compose:
+		`vi docker-compose.yaml`
+	- Configuração de arquivos:
+		- `mkdir conf.d`
+		
+		- `cd conf.d`
+		
+		- `vi defaul.conf`
+		
+### Como ficou o arquivo conf.d:		
+  ```
+   server
+	{
+        listen 80;
+        server_name appsdevops.tk;
+
+        location / {        
+          autoindex on;
+          autoindex_format json;
+         }
+
+        location ~ ^/api.json {
+	  default_type   application/json;
+          return 200  '{"service": {"oracle": "ok", "redis": "ok", "mongo": "down", "pgsql": "down", "mysql": "ok"}}';
+         }
+   ```
+   
+### Como ficou o docker-compose:
+  ```
+version: '3'
+
+services:
+ nginx:
+    container_name: nginx-json
+    image: thiago7sc/nginx:alpine
+    ports:
+      - "80:80"
+    restart: always
+    
+   ```   
+### Como ficou o Dockerfile:
+
+  ```
+FROM nginx:alpine
+COPY ./conf.d/default.conf /etc/nginx/conf.d
+EXPOSE 80
+WORKDIR /etc/nginx/conf.d
+ENTRYPOINT ["/usr/sbin/nginx"]
+CMD ["-g", "daemon off;"]
+
+  ```
+### Como ficou o Dockerfile:
+
+
+
+## Imagens da construção:
+
+
 ## Instância no GCP rodando imagem personalizada nos procedimentos citados:
 
 [API GCP](http://35.192.197.96/api.json)
