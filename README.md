@@ -38,3 +38,4 @@ http://35.192.197.96/api.json
 Testado e desenvolvido por:
 
 Thiago Azevedo - thiago7azevedo@gmail.com - https://hub.docker.com/repository/docker/thiago7sc
+
