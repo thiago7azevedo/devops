@@ -40,19 +40,19 @@
 		
 ### Como ficou o arquivo conf.d:		
   ```
-   server
-	{
+server
+        {
         listen 80;
         server_name appsdevops.tk;
 
         location / {        
           autoindex on;
           autoindex_format json;
-         }
+        }
 
         location ~ ^/api.json {
-	  default_type   application/json;
-          return 200  '{"service": {"oracle": "ok", "redis": "ok", "mongo": "down", "pgsql": "down", "mysql": "ok"}}';
+	       default_type   application/json;
+           return 200  '{"service": {"oracle": "ok", "redis": "ok", "mongo": "down", "pgsql": "down", "mysql": "ok"}}';
          }
    ```
    
