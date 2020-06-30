@@ -1,8 +1,20 @@
 
 # Bem vindos a instância beta do NGINX com docker compose. Instalação e configuração de instância minishift para rodar imagem personalizada!
 
+* [Início](#Início)
+* [Nginx](#Nginx)
+* [Docker](#Docker)
+* [Build](#Build)
+* [Minishift](#Minishift)
+* [Hyper-v](#Hyper-v)
+* [Instancia-Minishift](#Instancia-Minishift)
+* [SCC](#SCC)
+* [OC](#OC)
+* [NGROK](#NGROK)
+* [Freenom](#Freenom)
+* [SCC](#SCC)
 
-
+### Início
 
 - Objetivo:
 		
@@ -10,6 +22,8 @@
 	- Disponibilizar de forma estática um arquivo Json através do servidor NGINX exportando através da porta 80;
 	- Instalar e configurar instância Minishift para rodar nossa imagem personalizada em docker;
 	- Acessar endpoint de qualquer local da internet e efetuar a leitura do arquivo em formato Json.
+
+### Nginx
 
 - Procedimentos para iniciar instância Nginx:
 
@@ -58,6 +72,8 @@ server
          }
    ```
    
+### Docker
+
 ### Como ficou o docker-compose:
   ```
 version: '3'
@@ -116,6 +132,7 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 ![up](https://user-images.githubusercontent.com/53309633/86056732-44967c00-ba34-11ea-8d32-33731e2b8451.png)
 
 
+## Minishift
 
 # Configuração Instância Minishift:
 
@@ -136,6 +153,8 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 - O downloado pode ser efetuado através do repositório oficial em aqui: [Minishift](https://github.com/minishift/minishift/releases/tag/v1.34.2).
 - Descompactar o arquivo em uma pasta de fácil acesso;
 
+### Hyper-v
+
 ## Instalação Minishift e Hyper-V:
 
 - Um dos pŕé requisitos para rodar o Minishift, é a instalação de um driver de virtualização, neste caso utilizei o Hyper-V nativo no W10. Basta procurar no windows por Hyper.
@@ -154,6 +173,8 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 
 #### OBS: A configuração inicial de acesso, projeto, deploy e rotas será feito via painel console. Outra forma de configurar é via OpenShift CLI (oc), por linha de comando. Este link [Aqui](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html) possui as isntruções de instalação nos diversos sistemas. O download da ferramenta para windows está [aqui](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-windows.zip).
 
+### Instancia-Minishift
+
 ## Configuração isntância Minishift:
 
 - Com o console já acessado, é necessário criar um projeto novo em branco
@@ -164,10 +185,16 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 - Após isto, é necessário criar a rota externa para o endpoint de sua aplicação, conforme configuração de porta efetuada no docker compose da imagem.
 ![rota externa criada ](https://user-images.githubusercontent.com/53309633/86068750-8cc29800-ba4e-11ea-88b1-3ac97648a7af.png)
 
+### SCC
+
 ## IMPORTANTE:
  #### Com restrições de contexto de segurança (SCCs)
 - Algumas imagens de banco e serviços precisam rodar com root devido as restrições de segurança, por isso é necessário configurar o SCC para seu pod.
 - Siga para a psta que descompactou a sua OpenShift CLI (oc) e abra um terminal ali. Digite os comandos oc todos na raíz desta pasta.
+
+## Comandos OC
+
+# OC
 
 `oc status`
 Verifica o status do ambiente que voce está conectado
@@ -193,7 +220,8 @@ Este comando coloca seu pod no contexto correto para rodar o POD.
  
  ![serviço estático gerado pela imagem nginx em uma instancia minishift](https://user-images.githubusercontent.com/53309633/86068746-8b916b00-ba4e-11ea-9aba-51ad5c7a4540.png)
  
- # BONUS:
+ # BONUS 1:
+ ### NGROK
 
 ### Configuração ngrok para exposição de seu endpoint para a internet:
 
@@ -206,15 +234,25 @@ Este comando coloca seu pod no contexto correto para rodar o POD.
 ![ngrok com forward para expor porta 80](https://user-images.githubusercontent.com/53309633/86068757-8f24f200-ba4e-11ea-9b7e-b056578654c1.png)
 - O NGROk criará um link aleatório que estará exposto à internet.
 
+# BONUS 2:
+### Freenom
 
+### Registro de um domínio free em Freenom
 
-## Instância no GCP rodando imagem personalizada nos procedimentos citados:
+- Para expor um domínio próprio e gratuito, segue esta dica que achei na internet, [Freenom](https://my.freenom.com/domains.php)
+- Digite um domínio e veja o que está disponível e registre seu domínio
+![freenom1](https://user-images.githubusercontent.com/53309633/86071117-d0200500-ba54-11ea-813e-cd9020a1de9f.png)
+- Após registrado, vá até a aba Services/My Domains/Manange Domain/Management Tools/URL Forwarding
+- cadastre o link aleatório gerado pelo NGROK
+![freenom](https://user-images.githubusercontent.com/53309633/86071118-d1513200-ba54-11ea-990f-cf81b7064287.png)
+- Suainstância Minishift já está na internet
 
-[API GCP](http://35.192.197.96/api.json)
+??????
 
-## Testado e desenvolvido por:
+### OBS: O plano free do NGROK libera a conexão somente por 8 horas.
 
-#### Thiago Azevedo
+#### Espero poder ajudar quem estiver com dúvidas ou esteja começando no mundo devops como eu! Fico à disposição.
 
-thiago7azevedo@gmail.com - [Docker HUB](https://hub.docker.com/repository/docker/thiago7sc)
+# Testado e desenvolvido por - Thiago Azevedo
+Florianópolis - SC - thiago7azevedo@gmail.com - [Docker HUB](https://hub.docker.com/repository/docker/thiago7sc)
 
