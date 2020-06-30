@@ -116,7 +116,7 @@ Para carregar a imagem que temos em nosso localhost que acabamos de criar, é ne
 `docker-compose build`
 
 ### Subir containercom imagem personalizada:
-`docker-compose up -d.`
+`docker-compose up -d`
 
 ### Verificar logs:
 `docker-compose logs -f`
@@ -157,7 +157,7 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 
 ## Instalação Minishift e Hyper-V:
 
-- Um dos pŕé requisitos para rodar o Minishift, é a instalação de um driver de virtualização, neste caso utilizei o Hyper-V, assistente de virtualização de maquinas nativo do Windows
+- Um dos pré requisitos para rodar o Minishift, é a instalação de um driver de virtualização, neste caso utilizei o Hyper-V, assistente de virtualização de maquinas nativo do Windows
 ![hyper-v](https://user-images.githubusercontent.com/53309633/86075387-45dc9e80-ba5e-11ea-9b86-35b06cd98e43.png)
 
 - Abrir o CMD ou Terminal e acessar a pasta do Minishift que foi descompactada
@@ -181,7 +181,7 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 
 ## Configuração isntância Minishift:
 
-- Com o console já acessado, é necessário criar um projeto novo em branco
+- Após acesso ao console, é necessário criar um projeto novo em branco
 - Após o projeto criado, vamos fazer um deploy da imagem personalizada criada anteriormemente, que estará hospedada no [DockerHUb](https://hub.docker.com/repository/docker/thiago7sc/nginx).
 ![deploy imagem personalizada](https://user-images.githubusercontent.com/53309633/86068768-93510f80-ba4e-11ea-96e9-da016a06884f.png)
 ![imagem_deploy](https://user-images.githubusercontent.com/53309633/86075388-45dc9e80-ba5e-11ea-88b9-7a81f831411b.png)
@@ -202,7 +202,7 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 
 ## Erro de contexto de segurança
 
-- Caso ocorra o erro de contexto de segurança, abrira o POD com este erro
+- Caso ocorra o erro de contexto de segurança, abrirá o POD com este erro
 ![pod error inicial](https://user-images.githubusercontent.com/53309633/86075395-470dcb80-ba5e-11ea-96c9-52834213e28e.png)
 
 - Pela linha de comando após um `oc status` mostrará `crash-looping` 
@@ -220,10 +220,10 @@ Verifica o status do ambiente que voce está conectado
 Adiciona acesso ao projeto que voce escolher da lista 
 
 `oc get pods`
-Efetua leitura do status do pod que você acabou de criar.
+Efetua leitura do status do pod que você acabou de criar
 
 `oc get scc` 
-Lista todos os contextos de segurança pré-configurados.
+Lista todos os contextos de segurança pré-configurados
 ![login e status pod e projeto](https://user-images.githubusercontent.com/53309633/86068731-86342080-ba4e-11ea-9c4c-9c4f5352787f.png)
 
 `oc adm policy add-scc-to-user anyuid -z default`
@@ -235,14 +235,14 @@ Este comando coloca seu pod no contexto correto para rodar o POD.
  ![deploy completo e imagem rodando](https://user-images.githubusercontent.com/53309633/86068763-92b87900-ba4e-11ea-95db-25bf3895d3c4.png)
  ![pod rodando](https://user-images.githubusercontent.com/53309633/86068727-83393000-ba4e-11ea-93a4-003f3b6eade5.png)
  
- - Podemos escalar vários PODs de forma muito simples,clicando na seta pra cima ou remover pods com a seta para baixo
+ - Podemos escalar vários PODs de forma muito simples, clicando na seta pra cima ou remover pods com a seta para baixo
  ![escalando pod pos depoloy](https://user-images.githubusercontent.com/53309633/86075386-45440800-ba5e-11ea-9699-da00a12e6b85.png)
  ![3 pods](https://user-images.githubusercontent.com/53309633/86075372-42e1ae00-ba5e-11ea-8daa-857c2611cb0d.png)
  
  - Imagem do comando completo
  ![completo](https://user-images.githubusercontent.com/53309633/86075378-44ab7180-ba5e-11ea-9b74-47a579efac37.png)
 
- - Rora externa criada pelo Minishift 
+ - Rota externa criada pelo Minishift 
  ![serviço estático gerado pela imagem nginx em uma instancia minishift](https://user-images.githubusercontent.com/53309633/86068746-8b916b00-ba4e-11ea-9aba-51ad5c7a4540.png)
  
  - Monitoramento 
@@ -254,7 +254,7 @@ Este comando coloca seu pod no contexto correto para rodar o POD.
 
 ### Configuração ngrok para exposição de seu endpoint para a internet:
 
-- O link gerado pela instância minishift tem acesso somente em seu localhost, por isso se voce precisar utilizar de forma paliativa a exposição para a internet de suas aplicações, poderá utilziar o app [NGROK](dashboard.ngrok.com/get-started/setup).
+- O link gerado pela instância minishift tem acesso somente em seu localhost. Se voce precisar utilizar de forma paliativa a exposição para a internet de suas aplicações, poderá utilziar o app [NGROK](dashboard.ngrok.com/get-started/setup).
 ![download ngrok](https://user-images.githubusercontent.com/53309633/86068754-8df3c500-ba4e-11ea-9297-f39c6d80600d.png)
 
 - Após baixar o pacote referente a seu sistema, faça a descompactação em uma pasta de facil acesso. 
