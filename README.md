@@ -271,6 +271,8 @@ Este comando coloca seu pod no contexto correto para rodar o POD.
 
 ### Registro de um domínio free em Freenom
 
+##### OBS: O plano free do NGROK libera a conexão somente por 8 horas.
+
 - Para expor um domínio próprio e gratuito, segue esta dica que achei na internet, [Freenom](https://my.freenom.com/domains.php)
 - Digite um domínio e veja o que está disponível e registre seu domínio
 ![freenom1](https://user-images.githubusercontent.com/53309633/86071117-d0200500-ba54-11ea-813e-cd9020a1de9f.png)
@@ -282,10 +284,9 @@ Este comando coloca seu pod no contexto correto para rodar o POD.
 # Suainstância Minishift já está na internet
 ![appsdevops](https://user-images.githubusercontent.com/53309633/86075377-4412db00-ba5e-11ea-9ba9-931b935572cd.png)
 
-### OBS: O plano free do NGROK libera a conexão somente por 8 horas.
 
-#### Espero poder ajudar quem estiver com dúvidas ou esteja começando no mundo devops como eu! Fico à disposição.
+# Espero poder ajudar quem estiver com dúvidas ou esteja começando no mundo devops como eu! Fico à disposição.
 
-# Testado e desenvolvido por - Thiago Azevedo
+### Testado e desenvolvido por - Thiago Azevedo
 Florianópolis - SC - thiago7azevedo@gmail.com - [Docker HUB](https://hub.docker.com/repository/docker/thiago7sc)
 
