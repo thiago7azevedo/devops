@@ -93,7 +93,7 @@ Efetuar login no docker hub
 `docker push thiago7sc/nginx:tagname`
 Este comando envia a imagemcirada para o repositório remoto:
 
-###OBS: Você precisa préviamente criar umrepositório com o nome da sua imagem. Neste exemplo meu repositório no DockerHub é [nginx](https://hub.docker.com/repository/docker/thiago7sc/nginx)
+### OBS: Você precisa préviamente criar umrepositório com o nome da sua imagem. Neste exemplo meu repositório no DockerHub é [nginx](https://hub.docker.com/repository/docker/thiago7sc/nginx)
 
 ### Build com docker-compose:
 Para carregar a imagem que temos em nosso localhost que acabamos de criar, é necessário efetuar um Build também no docker-compose.
@@ -142,9 +142,15 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 - ??? Print
 - Abrir o CMD ou Terminal e acessar a pasta do Minishift que foi descompactada
 - Na raíz desta pasta descompactada, efetuar o comando `minishift start` e aguardar a configuração e inicialização
+![iniciando minishift windows](https://user-images.githubusercontent.com/53309633/86068773-94823c80-ba4e-11ea-87de-616a38342bb6.png)
+![minishift up windows1](https://user-images.githubusercontent.com/53309633/86068742-8a603e00-ba4e-11ea-8f77-6da8a03e8e37.png)
 - Se tudo ocorrer bem, conforme seguido até aqui, mostrará na tela a `OpenShift server Starter` e estará pronto para configuração via console
+![minishift up windows](https://user-images.githubusercontent.com/53309633/86068758-90561f00-ba4e-11ea-840a-fa26f95a07bf.png)
 - O Ip e porta para acesso ao console estará no log de inicialização, será algo assim: `https://172.17.59.62:8443/console`
 - Login e senha já vem pré configurado para admin:admin ou developer:developer
+
+![criação projeto dentro do minishift](https://user-images.githubusercontent.com/53309633/86068759-91874c00-ba4e-11ea-9ce4-82c98845de2d.png)
+
 
 #### OBS: A configuração inicial de acesso, projeto, deploy e rotas será feito via painel console. Outra forma de configurar é via OpenShift CLI (oc), por linha de comando. Este link [Aqui](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html) possui as isntruções de instalação nos diversos sistemas. O download da ferramenta para windows está [aqui](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-windows.zip).
 
@@ -152,12 +158,54 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 
 - Com o console já acessado, é necessário criar um projeto novo em branco
 - Após o projeto criado, vamos fazer um deploy da imagem personalizada criada anteriormemente, que estará hospedada no [DockerHUb](https://hub.docker.com/repository/docker/thiago7sc/nginx).
+![deploy imagem personalizada](https://user-images.githubusercontent.com/53309633/86068768-93510f80-ba4e-11ea-96e9-da016a06884f.png)
+- Assim que a imagem é configurada atarvés do image name thiago7sc/nginx:alpine, o POD será criado automaticamente e estará rodando em seguida.
+![deploy rodando](https://user-images.githubusercontent.com/53309633/86068736-892f1100-ba4e-11ea-84b3-b8a6a540e413.png)
+- Após isto, é necessário criar a rota externa para o endpoint de sua aplicação, conforme configuração de porta efetuada no docker compose da imagem.
+![rota externa criada ](https://user-images.githubusercontent.com/53309633/86068750-8cc29800-ba4e-11ea-88b1-3ac97648a7af.png)
 
+## IMPORTANTE:
+ #### Com restrições de contexto de segurança (SCCs)
+- Algumas imagens de banco e serviços precisam rodar com root devido as restrições de segurança, por isso é necessário configurar o SCC para seu pod.
+- Siga para a psta que descompactou a sua OpenShift CLI (oc) e abra um terminal ali. Digite os comandos oc todos na raíz desta pasta.
 
-## Imagens da construção:
-![conf d](https://user-images.githubusercontent.com/53309633/86056723-4102f500-ba34-11ea-94b6-3ca676c927f1.png)
-![build](https://user-images.githubusercontent.com/53309633/86056736-45c7a900-ba34-11ea-900c-d0c7efdf80b2.png)
-![up](https://user-images.githubusercontent.com/53309633/86056732-44967c00-ba34-11ea-8d32-33731e2b8451.png)
+`oc status`
+Verifica o status do ambiente que voce está conectado
+
+`oc project {seuprojeto}`
+Adiciona acesso ao projeto que voce escolher da lista 
+
+`oc get pods`
+Efetua leitura do status do pod que você acabou de criar.
+
+`oc get scc` 
+Lista todos os contextos de segurança pré-configurados.
+![login e status pod e projeto](https://user-images.githubusercontent.com/53309633/86068731-86342080-ba4e-11ea-9c4c-9c4f5352787f.png)
+
+`oc adm policy add-scc-to-user privileged -z default`
+Este comando coloca seu pod no contexto correto para rodar o POD.
+![configurando scc](https://user-images.githubusercontent.com/53309633/86068732-86ccb700-ba4e-11ea-8dea-75d50cd3c5f4.png)
+ 
+ - É necessário agora refazer o deploy do seu projeto, onde estará rodando sem erros.
+ ![deploy completo e imagem rodando](https://user-images.githubusercontent.com/53309633/86068763-92b87900-ba4e-11ea-95db-25bf3895d3c4.png)
+ ![pod rodando](https://user-images.githubusercontent.com/53309633/86068727-83393000-ba4e-11ea-93a4-003f3b6eade5.png)
+
+ 
+ ![serviço estático gerado pela imagem nginx em uma instancia minishift](https://user-images.githubusercontent.com/53309633/86068746-8b916b00-ba4e-11ea-9aba-51ad5c7a4540.png)
+ 
+ # BONUS:
+
+### Configuração ngrok para exposição de seu endpoint para a internet:
+
+- O link gerado pela instância minishift tem acesso somente em seu localhost, por isso se voce precisar utilizar de forma paliativa a exposição para a internet de suas aplicações, poderá utilziar o app [NGROK](dashboard.ngrok.com/get-started/setup).
+![download ngrok](https://user-images.githubusercontent.com/53309633/86068754-8df3c500-ba4e-11ea-9297-f39c6d80600d.png)
+- Após baixar o pacote referente a seu sistema, faça a descompactação em uma pasta de facil acesso. 
+- Para utilizar no exemplo aqui citado, abra o CMD na pasta raiz descompactada e execute o comando `ngrok http 80`
+- Em seguida com o CMD aberto na pasta raiz do OpenShift CLI (oc) execute o comando para verificar o nome do seu pod `oc get pods`
+- Com isto em mãos, execute o comando `òc port-forward-{nome pod} 80:80` que fará a exposição e encaminhamento da porta de dentro do pod minishift para o ngrok em seu localhost.
+![ngrok com forward para expor porta 80](https://user-images.githubusercontent.com/53309633/86068757-8f24f200-ba4e-11ea-9b7e-b056578654c1.png)
+- O NGROk criará um link aleatório que estará exposto à internet.
+
 
 
 ## Instância no GCP rodando imagem personalizada nos procedimentos citados:
