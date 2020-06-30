@@ -157,14 +157,18 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 
 ## Instalação Minishift e Hyper-V:
 
-- Um dos pŕé requisitos para rodar o Minishift, é a instalação de um driver de virtualização, neste caso utilizei o Hyper-V nativo no W10. Basta procurar no windows por Hyper.
-- ??? Print
+- Um dos pŕé requisitos para rodar o Minishift, é a instalação de um driver de virtualização, neste caso utilizei o Hyper-V, assistente de virtualização de maquinas nativo do Windows
+![hyper-v](https://user-images.githubusercontent.com/53309633/86075387-45dc9e80-ba5e-11ea-9b86-35b06cd98e43.png)
+
 - Abrir o CMD ou Terminal e acessar a pasta do Minishift que foi descompactada
 - Na raíz desta pasta descompactada, efetuar o comando `minishift start` e aguardar a configuração e inicialização
+![minishift start](https://user-images.githubusercontent.com/53309633/86075392-46753500-ba5e-11ea-9d7e-edfbe6fc3360.png)
 ![iniciando minishift windows](https://user-images.githubusercontent.com/53309633/86068773-94823c80-ba4e-11ea-87de-616a38342bb6.png)
 ![minishift up windows1](https://user-images.githubusercontent.com/53309633/86068742-8a603e00-ba4e-11ea-8f77-6da8a03e8e37.png)
+
 - Se tudo ocorrer bem, conforme seguido até aqui, mostrará na tela a `OpenShift server Starter` e estará pronto para configuração via console
 ![minishift up windows](https://user-images.githubusercontent.com/53309633/86068758-90561f00-ba4e-11ea-840a-fa26f95a07bf.png)
+
 - O Ip e porta para acesso ao console estará no log de inicialização, será algo assim: `https://172.17.59.62:8443/console`
 - Login e senha já vem pré configurado para admin:admin ou developer:developer
 
@@ -180,9 +184,13 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 - Com o console já acessado, é necessário criar um projeto novo em branco
 - Após o projeto criado, vamos fazer um deploy da imagem personalizada criada anteriormemente, que estará hospedada no [DockerHUb](https://hub.docker.com/repository/docker/thiago7sc/nginx).
 ![deploy imagem personalizada](https://user-images.githubusercontent.com/53309633/86068768-93510f80-ba4e-11ea-96e9-da016a06884f.png)
+![imagem_deploy](https://user-images.githubusercontent.com/53309633/86075388-45dc9e80-ba5e-11ea-88b9-7a81f831411b.png)
+
 - Assim que a imagem é configurada atarvés do image name thiago7sc/nginx:alpine, o POD será criado automaticamente e estará rodando em seguida.
-![deploy rodando](https://user-images.githubusercontent.com/53309633/86068736-892f1100-ba4e-11ea-84b3-b8a6a540e413.png)
+![primeiro deploy](https://user-images.githubusercontent.com/53309633/86075396-47a66200-ba5e-11ea-8b09-d1c58d325acb.png)
+
 - Após isto, é necessário criar a rota externa para o endpoint de sua aplicação, conforme configuração de porta efetuada no docker compose da imagem.
+![route](https://user-images.githubusercontent.com/53309633/86075397-47a66200-ba5e-11ea-9b98-2a8ed3f921ff.png)
 ![rota externa criada ](https://user-images.githubusercontent.com/53309633/86068750-8cc29800-ba4e-11ea-88b1-3ac97648a7af.png)
 
 ### SCC
@@ -191,6 +199,15 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
  #### Com restrições de contexto de segurança (SCCs)
 - Algumas imagens de banco e serviços precisam rodar com root devido as restrições de segurança, por isso é necessário configurar o SCC para seu pod.
 - Siga para a psta que descompactou a sua OpenShift CLI (oc) e abra um terminal ali. Digite os comandos oc todos na raíz desta pasta.
+
+## Erro de contexto de segurança
+
+- Caso ocorra o erro de contexto de segurança, abrira o POD com este erro
+![pod error inicial](https://user-images.githubusercontent.com/53309633/86075395-470dcb80-ba5e-11ea-96c9-52834213e28e.png)
+
+- Pela linha de comando após um `oc status` mostrará `crash-looping` 
+![looping_credenciais](https://user-images.githubusercontent.com/53309633/86075391-46753500-ba5e-11ea-89ec-03d728328415.png)
+
 
 ## Comandos OC
 
@@ -209,16 +226,28 @@ Efetua leitura do status do pod que você acabou de criar.
 Lista todos os contextos de segurança pré-configurados.
 ![login e status pod e projeto](https://user-images.githubusercontent.com/53309633/86068731-86342080-ba4e-11ea-9c4c-9c4f5352787f.png)
 
-`oc adm policy add-scc-to-user privileged -z default`
+`oc adm policy add-scc-to-user anyuid -z default`
 Este comando coloca seu pod no contexto correto para rodar o POD.
-![configurando scc](https://user-images.githubusercontent.com/53309633/86068732-86ccb700-ba4e-11ea-8dea-75d50cd3c5f4.png)
+![anyuid](https://user-images.githubusercontent.com/53309633/86075375-4412db00-ba5e-11ea-8f87-f5c4d7fdedb1.png)
  
  - É necessário agora refazer o deploy do seu projeto, onde estará rodando sem erros.
+ ![deploy](https://user-images.githubusercontent.com/53309633/86075381-44ab7180-ba5e-11ea-8b7a-1805b5f42d7d.png)
  ![deploy completo e imagem rodando](https://user-images.githubusercontent.com/53309633/86068763-92b87900-ba4e-11ea-95db-25bf3895d3c4.png)
  ![pod rodando](https://user-images.githubusercontent.com/53309633/86068727-83393000-ba4e-11ea-93a4-003f3b6eade5.png)
-
  
+ - Podemos escalar vários PODs de forma muito simples,clicando na seta pra cima ou remover pods com a seta para baixo
+ ![escalando pod pos depoloy](https://user-images.githubusercontent.com/53309633/86075386-45440800-ba5e-11ea-9699-da00a12e6b85.png)
+ ![3 pods](https://user-images.githubusercontent.com/53309633/86075372-42e1ae00-ba5e-11ea-8daa-857c2611cb0d.png)
+ 
+ - Imagem do comando completo
+ ![completo](https://user-images.githubusercontent.com/53309633/86075378-44ab7180-ba5e-11ea-9b74-47a579efac37.png)
+
+ - Rora externa criada pelo Minishift 
  ![serviço estático gerado pela imagem nginx em uma instancia minishift](https://user-images.githubusercontent.com/53309633/86068746-8b916b00-ba4e-11ea-9aba-51ad5c7a4540.png)
+ 
+ - Monitoramento 
+ ![monitoramento](https://user-images.githubusercontent.com/53309633/86075394-470dcb80-ba5e-11ea-94dc-964f4e180c62.png)
+
  
  # BONUS 1:
  ### NGROK
@@ -227,12 +256,15 @@ Este comando coloca seu pod no contexto correto para rodar o POD.
 
 - O link gerado pela instância minishift tem acesso somente em seu localhost, por isso se voce precisar utilizar de forma paliativa a exposição para a internet de suas aplicações, poderá utilziar o app [NGROK](dashboard.ngrok.com/get-started/setup).
 ![download ngrok](https://user-images.githubusercontent.com/53309633/86068754-8df3c500-ba4e-11ea-9297-f39c6d80600d.png)
+
 - Após baixar o pacote referente a seu sistema, faça a descompactação em uma pasta de facil acesso. 
 - Para utilizar no exemplo aqui citado, abra o CMD na pasta raiz descompactada e execute o comando `ngrok http 80`
 - Em seguida com o CMD aberto na pasta raiz do OpenShift CLI (oc) execute o comando para verificar o nome do seu pod `oc get pods`
 - Com isto em mãos, execute o comando `òc port-forward-{nome pod} 80:80` que fará a exposição e encaminhamento da porta de dentro do pod minishift para o ngrok em seu localhost.
 ![ngrok com forward para expor porta 80](https://user-images.githubusercontent.com/53309633/86068757-8f24f200-ba4e-11ea-9b7e-b056578654c1.png)
+
 - O NGROk criará um link aleatório que estará exposto à internet.
+![image](https://user-images.githubusercontent.com/53309633/86076690-e5029580-ba60-11ea-848a-9ef25307fa40.png)
 
 # BONUS 2:
 ### Freenom
@@ -242,12 +274,13 @@ Este comando coloca seu pod no contexto correto para rodar o POD.
 - Para expor um domínio próprio e gratuito, segue esta dica que achei na internet, [Freenom](https://my.freenom.com/domains.php)
 - Digite um domínio e veja o que está disponível e registre seu domínio
 ![freenom1](https://user-images.githubusercontent.com/53309633/86071117-d0200500-ba54-11ea-813e-cd9020a1de9f.png)
+
 - Após registrado, vá até a aba Services/My Domains/Manange Domain/Management Tools/URL Forwarding
 - cadastre o link aleatório gerado pelo NGROK
 ![freenom](https://user-images.githubusercontent.com/53309633/86071118-d1513200-ba54-11ea-990f-cf81b7064287.png)
-- Suainstância Minishift já está na internet
 
-??????
+# Suainstância Minishift já está na internet
+![appsdevops](https://user-images.githubusercontent.com/53309633/86075377-4412db00-ba5e-11ea-9ba9-931b935572cd.png)
 
 ### OBS: O plano free do NGROK libera a conexão somente por 8 horas.
 
