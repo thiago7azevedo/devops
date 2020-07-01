@@ -223,29 +223,29 @@ Efetua leitura do status do pod que você acabou de criar
 
 `oc get scc` 
 Lista todos os contextos de segurança pré-configurados
-![login e status pod e projeto](https://user-images.githubusercontent.com/53309633/86068731-86342080-ba4e-11ea-9c4c-9c4f5352787f.png)
+![3](https://user-images.githubusercontent.com/53309633/86264288-ad970480-bb98-11ea-9ca5-6086085db16e.png)
 
 `oc adm policy add-scc-to-user anyuid -z default`
 Este comando coloca seu pod no contexto correto para rodar o POD.
 ![anyuid](https://user-images.githubusercontent.com/53309633/86075375-4412db00-ba5e-11ea-8f87-f5c4d7fdedb1.png)
  
  - É necessário agora refazer o deploy do seu projeto, onde estará rodando sem erros.
- ![deploy](https://user-images.githubusercontent.com/53309633/86075381-44ab7180-ba5e-11ea-8b7a-1805b5f42d7d.png)
- ![deploy completo e imagem rodando](https://user-images.githubusercontent.com/53309633/86068763-92b87900-ba4e-11ea-95db-25bf3895d3c4.png)
- ![pod rodando](https://user-images.githubusercontent.com/53309633/86068727-83393000-ba4e-11ea-93a4-003f3b6eade5.png)
+![4](https://user-images.githubusercontent.com/53309633/86264286-ad970480-bb98-11ea-8333-482858288ea4.png)
+![5](https://user-images.githubusercontent.com/53309633/86264285-acfe6e00-bb98-11ea-9cc6-dc956f38be2c.png)
+![6](https://user-images.githubusercontent.com/53309633/86264282-acfe6e00-bb98-11ea-819e-c2fbf66528db.png)
  
  - Podemos escalar vários PODs de forma muito simples, clicando na seta pra cima ou remover pods com a seta para baixo
- ![escalando pod pos depoloy](https://user-images.githubusercontent.com/53309633/86075386-45440800-ba5e-11ea-9699-da00a12e6b85.png)
- ![3 pods](https://user-images.githubusercontent.com/53309633/86075372-42e1ae00-ba5e-11ea-8daa-857c2611cb0d.png)
+![7](https://user-images.githubusercontent.com/53309633/86264280-ac65d780-bb98-11ea-8ebc-09449e2e2ea3.png)
+![8](https://user-images.githubusercontent.com/53309633/86264279-abcd4100-bb98-11ea-9eba-c9709646ac53.png)
  
  - Imagem do comando completo
- ![completo](https://user-images.githubusercontent.com/53309633/86075378-44ab7180-ba5e-11ea-9b74-47a579efac37.png)
+![9](https://user-images.githubusercontent.com/53309633/86264278-abcd4100-bb98-11ea-92a9-0ce3c564cf0b.png)
 
  - Rota externa criada pelo Minishift 
  ![serviço estático gerado pela imagem nginx em uma instancia minishift](https://user-images.githubusercontent.com/53309633/86068746-8b916b00-ba4e-11ea-9aba-51ad5c7a4540.png)
  
  - Monitoramento 
- ![monitoramento](https://user-images.githubusercontent.com/53309633/86075394-470dcb80-ba5e-11ea-94dc-964f4e180c62.png)
+![10](https://user-images.githubusercontent.com/53309633/86264272-aa9c1400-bb98-11ea-8779-1c4f9918440a.png)
 
  
  # BONUS 1:
