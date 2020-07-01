@@ -172,8 +172,7 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 - O Ip e porta para acesso ao console estará no log de inicialização, será algo assim: `https://172.17.59.62:8443/console`
 - Login e senha já vem pré configurado para admin:admin ou developer:developer
 
-![criação projeto dentro do minishift](https://user-images.githubusercontent.com/53309633/86068759-91874c00-ba4e-11ea-9ce4-82c98845de2d.png)
-
+![devops](https://user-images.githubusercontent.com/53309633/86259374-50985000-bb92-11ea-8a41-312e07d52a54.png)
 
 #### OBS: A configuração inicial de acesso, projeto, deploy e rotas será feito via painel console. Outra forma de configurar é via OpenShift CLI (oc), por linha de comando. Este link [Aqui](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html) possui as isntruções de instalação nos diversos sistemas. O download da ferramenta para windows está [aqui](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-windows.zip).
 
@@ -183,15 +182,15 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 
 - Após acesso ao console, é necessário criar um projeto novo em branco
 - Após o projeto criado, vamos fazer um deploy da imagem personalizada criada anteriormemente, que estará hospedada no [DockerHUb](https://hub.docker.com/repository/docker/thiago7sc/nginx).
-![deploy imagem personalizada](https://user-images.githubusercontent.com/53309633/86068768-93510f80-ba4e-11ea-96e9-da016a06884f.png)
-![imagem_deploy](https://user-images.githubusercontent.com/53309633/86075388-45dc9e80-ba5e-11ea-88b9-7a81f831411b.png)
+![1](https://user-images.githubusercontent.com/53309633/86260131-4034a500-bb93-11ea-8a5d-cc87cabc7657.png)
+![2](https://user-images.githubusercontent.com/53309633/86260130-3f9c0e80-bb93-11ea-92bd-8d4f64dd8bd9.png)
 
 - Assim que a imagem é configurada atarvés do image name thiago7sc/nginx:alpine, o POD será criado automaticamente e estará rodando em seguida.
-![primeiro deploy](https://user-images.githubusercontent.com/53309633/86075396-47a66200-ba5e-11ea-8b09-d1c58d325acb.png)
+![3](https://user-images.githubusercontent.com/53309633/86260129-3f9c0e80-bb93-11ea-9a08-f73a50892c53.png)
 
 - Após isto, é necessário criar a rota externa para o endpoint de sua aplicação, conforme configuração de porta efetuada no docker compose da imagem.
-![route](https://user-images.githubusercontent.com/53309633/86075397-47a66200-ba5e-11ea-9b98-2a8ed3f921ff.png)
-![rota externa criada ](https://user-images.githubusercontent.com/53309633/86068750-8cc29800-ba4e-11ea-88b1-3ac97648a7af.png)
+![4](https://user-images.githubusercontent.com/53309633/86260127-3f037800-bb93-11ea-896e-d7bf30f22e6e.png)
+![5](https://user-images.githubusercontent.com/53309633/86260119-3dd24b00-bb93-11ea-8f85-ed7f90151f34.png)
 
 ### SCC
 
@@ -203,10 +202,10 @@ Verificar em seu navegador com localhost/api.json a saida a seguir:
 ## Erro de contexto de segurança
 
 - Caso ocorra o erro de contexto de segurança, abrirá o POD com este erro
-![pod error inicial](https://user-images.githubusercontent.com/53309633/86075395-470dcb80-ba5e-11ea-96c9-52834213e28e.png)
+![1](https://user-images.githubusercontent.com/53309633/86261195-9fdf8000-bb94-11ea-8fba-59bb40ba4825.png)
 
 - Pela linha de comando após um `oc status` mostrará `crash-looping` 
-![looping_credenciais](https://user-images.githubusercontent.com/53309633/86075391-46753500-ba5e-11ea-89ec-03d728328415.png)
+![2](https://user-images.githubusercontent.com/53309633/86261194-9fdf8000-bb94-11ea-958e-8a16fc88d438.png)
 
 
 ## Comandos OC
